@@ -1,4 +1,4 @@
-# company_balcklist
+# 武汉IT公司红黑榜
 
 如需提交相关公司信息，请修改data.js文件后提交。
 
