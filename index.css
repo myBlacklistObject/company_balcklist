@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'iconfont';  /* project id 1210478 */
+    src: url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.eot');
+    src: url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+body{
+    margin: 0;
+    padding: 70px 0 70px 0;
+    align-items: center;
+}
+.title_box{
+    width: 100%;
+    padding: 25px 0;
+    text-align: center;
+    font-size: 25px;
+    font-family: 黑体;
+    background-color: #000;
+    color: #fff;
+    border-radius: 0 0 50px 50px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 998;
+}
+.item_box{
+    width: 100%;
+    min-width: 300px;
+    margin-top: 15px;
+}
+.item_box div{
+    width: 85%;
+    padding: 5px 15px;
+    text-align: left;
+}
+.company_name{
+    width: 85%;
+    font-size: 25px;
+    color: #ffffff;
+    padding: 15px;
+    border: solid 1px #000;
+    border-radius: 10px 10px 0 0;
+    background-color: #000;
+}
+.company_address{
+    width: 85%;
+    font-size: 17px;
+    color: #ffffff;
+    min-height: 23px;
+    padding: 15px;
+    border: solid 1px #000;
+    background-color: #000;
+}
+.float_left{
+    float: left;
+}
+.float_right{
+    float: right;
+}
+.reason{
+    border: 1px solid black;
+    border-bottom-width: 0;
+}
+.fuli{
+    border: 1px solid black;
+    border-top-width: 0;
+    border-radius: 0 0 10px 10px;
+    min-height: 30px;
+}
+.fuli_item{
+    padding: 3px 5px;
+    color: #fff;
+    border-radius: 3px;
+}
+.fuli_item_yes{
+    border: solid 1px forestgreen;
+    background-color: forestgreen;
+}
+.fuli_item_no{
+    border: solid 1px gray;
+    background-color: gray;
+}
+.search_input{
+    width: 100%;
+    padding: 5px 10px 5px 30px;
+    border-radius: 20px;
+    font-size: 15px;
+    border: solid 1px #000;
+    background-color: #fff;
+    color: #000;
+    margin-left: -20px;
+}
+.search_icon{
+    margin-right: -30px;
+    font-size: 25px;
+    position: relative;
+    top: 30px;
+    margin-left: -15px;
+}
+.bottom_box{
+    /*background-color: #ff0000;*/
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.bottom_item_red{
+    width: 50%;
+    background-color: darkred;
+    padding: 15px 0;
+}
+.bottom_item_black{
+    width: 50%;
+    background-color: #000;
+    padding: 15px 0;
+}
+.bottom_item_add{
+    width: 56px;
+    height: 56px;
+    margin: 0 -28px;
+    border-radius: 28px;
+    background-color: gray;
+    z-index: 999;
+    font-size: 50px;
+}
