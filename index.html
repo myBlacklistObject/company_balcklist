@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no,">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Title</title>
+    <script type="text/javascript" src="http://www.w3school.com.cn/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <style>
+        @font-face {
+            font-family: 'iconfont';  /* project id 1210478 */
+            src: url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.eot');
+            src: url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.eot?#iefix') format('embedded-opentype'),
+            url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.woff2') format('woff2'),
+            url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.woff') format('woff'),
+            url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.ttf') format('truetype'),
+            url('//at.alicdn.com/t/font_1210478_9hnudhvcv7m.svg#iconfont') format('svg');
+        }
+        .iconfont{
+            font-family:"iconfont" !important;
+            font-size:16px;font-style:normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;}
+        body{
+            margin: 0;
+            padding: 70px 0 70px 0;
+            align-items: center;
+        }
+        .title_box{
+            width: 100%;
+            padding: 25px 0;
+            text-align: center;
+            font-size: 25px;
+            font-family: 黑体;
+            background-color: #000;
+            color: #fff;
+            border-radius: 0 0 50px 50px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .item_box{
+            width: 100%;
+            min-width: 300px;
+            margin-top: 15px;
+        }
+        .item_box div{
+            width: 85%;
+            padding: 5px 15px;
+            text-align: left;
+        }
+        .company_name{
+            width: 85%;
+            font-size: 25px;
+            color: #ffffff;
+            padding: 15px;
+            border: solid 1px #000;
+            border-radius: 10px 10px 0 0;
+            background-color: #000;
+        }
+        .company_address{
+            width: 85%;
+            font-size: 17px;
+            color: #ffffff;
+            min-height: 23px;
+            padding: 15px;
+            border: solid 1px #000;
+            background-color: #000;
+        }
+        .float_left{
+            float: left;
+        }
+        .float_right{
+            float: right;
+        }
+        .reason{
+            border: 1px solid black;
+            border-bottom-width: 0;
+        }
+        .fuli{
+            border: 1px solid black;
+            border-top-width: 0;
+            border-radius: 0 0 10px 10px;
+            min-height: 30px;
+        }
+        .fuli_item{
+            padding: 3px 5px;
+            color: #fff;
+            border-radius: 3px;
+        }
+        .fuli_item_yes{
+            border: solid 1px forestgreen;
+            background-color: forestgreen;
+        }
+        .fuli_item_no{
+            border: solid 1px gray;
+            background-color: gray;
+        }
+        .search_input{
+            width: 100%;
+            padding: 5px 10px 5px 30px;
+            border-radius: 20px;
+            font-size: 15px;
+            border: solid 1px #000;
+            background-color: #fff;
+            color: #000;
+            margin-left: -20px;
+        }
+        .search_icon{
+            margin-right: -30px;
+            font-size: 25px;
+            position: relative;
+            top: 30px;
+            margin-left: -15px;
+        }
+        .bottom_box{
+            /*background-color: #ff0000;*/
+            text-align: center;
+            font-size: 20px;
+            color: #fff;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        .bottom_item_red{
+            width: 50%;
+            background-color: darkred;
+            padding: 15px 0;
+        }
+        .bottom_item_black{
+            width: 50%;
+            background-color: #000;
+            padding: 15px 0;
+        }
+        .bottom_item_add{
+            width: 56px;
+            height: 56px;
+            margin: 0 -28px;
+            border-radius: 28px;
+            background-color: gray;
+            z-index: 999;
+            font-size: 50px;
+        }
+    </style>
+    <script>
+        var now_data;
+
+        $(function () {
+            $(".search_input").bind('keypress',function (event) {
+                if(event.keyCode=="13"){
+                    event.preventDefault();
+                    search();
+                }
+            })
+            now_data=blacklist;
+            showList();
+        });
+
+        function showList() {
+            var content_box=$("#content_box");
+            content_box.html("");
+            var dataLength=now_data.length;
+            for(var i=0;i<dataLength;i++){
+                var gjj=now_data[i].gjj_status;
+                var sb=now_data[i].sb_status;
+                var gjj_style="fuli_item_yes";
+                var sb_style="fuli_item_yes";
+                if(gjj==undefined || gjj==null ||  gjj.length==0 || gjj=="无" || gjj=="没有"){
+                    gjj_style="fuli_item_no";
+                    if(gjj==undefined || gjj==null ||  gjj.length==0){
+                        gjj="未知";
+                    }else{
+                        gjj="无";
+                    }
+                }
+                if(sb==undefined || sb==null ||  sb.length==0 || sb=="无" || sb=="没有"){
+                    sb_style="fuli_item_no";
+                    if(sb==undefined || sb==null ||  sb.length==0){
+                        sb="未知";
+                    }else{
+                        sb="无";
+                    }
+                }
+                var html="<div class=\"item_box\" align=\"center\">\n" +
+                    "            <div class=\"company_name\">"+now_data[i].company_name+"</div>\n" +
+                    "            <div class=\"company_address\">地址："+now_data[i].company_address+"</div>\n" +
+                    "            <div class=\"company_address\"><span class=\"float_left\">"+now_data[i].how_to_know+"</span><span class=\"float_right\">录入时间："+now_data[i].add_time+"</span></div>\n" +
+                    "            <div class=\"reason\">"+now_data[i].reason+"</div>\n" +
+                    "            <div class=\"reason\"><b>备注："+now_data[i].remark+"</b></div>\n" +
+                    "            <div class=\"fuli\"><span class=\"float_left fuli_item "+gjj_style+"\">公积金 "+gjj+"</span><span class=\"float_right fuli_item "+sb_style+"\">社保 "+sb+"</span></div>\n" +
+                    "        </div>";
+                content_box.append(html);
+            }
+        }
+
+        var flag=0;
+        function changeList(type) {
+            flag=type;
+            if(type==0){
+                now_data=blacklist;
+                showList();
+                $(".title_box").css("background-color","#000").html("武汉IT公司黑榜");
+                $(".company_name").css("background-color","#000").css("border-color","#000");
+                $(".company_address").css("background-color","#000").css("border-color","#000");
+                $(".reason").css("border-color","#000");
+                $(".fuli").css("border-color","#000");
+                $(".search_input").css("border-color","#000");
+
+            }else if(type==1){
+                now_data=whitelist;
+                showList();
+                $(".title_box").css("background-color","darkred").html("武汉IT公司红榜");
+                $(".company_name").css("background-color","darkred").css("border-color","darkred");
+                $(".company_address").css("background-color","darkred").css("border-color","darkred");
+                $(".reason").css("border-color","darkred");
+                $(".fuli").css("border-color","darkred");
+                $(".search_input").css("border-color","darkred");
+            }
+            $("html,body").animate({
+                scrollTop:0
+            },500);
+        }
+
+        function search() {
+            var key_word=$(".search_input").val();
+            if(flag==0){
+                now_data=blacklist;
+            }else if(flag==1){
+                now_data=whitelist;
+            }
+            if(key_word.length>0){
+                var data_list=new Array();
+                for(var i=0;i<now_data.length;i++){
+                    var data=now_data[i];
+                    if(data.company_name.indexOf(key_word)>=0){
+                        data_list.push(data);
+                    }
+                }
+                now_data=data_list;
+            }
+            showList();
+        }
+    </script>
+</head>
+<body>
+    <div class="title_box">
+        武汉IT公司黑榜
+    </div>
+    <div style="width: 100%" align="center">
+        <div style="width: 70%" align="left">
+            <i class="search_icon iconfont">&#xe688;</i><input class="search_input" type="text">
+        </div>
+
+    </div>
+    <div id="content_box">
+        <p>数据加载中……</p>
+
+    </div>
+
+    <div class="bottom_box">
+        <!--武汉IT公司红榜-->
+        <div class="bottom_item_black" onclick="changeList(0)">黑榜</div><div class="bottom_item_add iconfont">&#xe635;</div><div class="bottom_item_red" onclick="changeList(1)">红榜</div>
+    </div>
+
+</body>
+</html>
