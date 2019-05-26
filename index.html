@@ -31,9 +31,82 @@
                 /*隐藏的方法*/
                 //m1.hide()
             });
-            now_data=blacklist;
-            showList();
+            init();
         });
+
+        function init() {
+            //获取远程黑名单数据
+            jQuery.ajax({
+                url: "https://data.heroku.com/dataclips/dpfzmjfprgtipcfghdvhxfftqxau.json",
+                type: "GET",
+                data: {
+                    "access-token":"0b845f1e-d0f5-41a7-9b79-d168989e8eaa",
+                    random: new Date().getTime()
+                },
+                success: function (response) {
+                    console.dir("获取远程数据成功");
+                    if (response.values!=null) {
+                        var data_list=new Array();
+                        var remote_data=response.values;
+                        for(var i=0;i<remote_data.length;i++){
+                            var data=new Object();
+                            data.company_name=remote_data[i][1];
+                            data.company_address=remote_data[i][2];
+                            data.reason=remote_data[i][3];
+                            data.how_to_know=remote_data[i][4];
+                            data.sb_status=remote_data[i][5];
+                            data.gjj_status=remote_data[i][6];
+                            data.remark=remote_data[i][7];
+                            data.add_time=remote_data[i][8];
+                            data_list.push(data);
+                        }
+                        blacklist=data_list;
+                    }
+                    console.dir(data_list);
+                    now_data=blacklist;
+                    showList();
+                },
+                error: function (response) {
+                    console.dir("获取远程数据失败"+response.statusText);
+                    now_data=blacklist;
+                    showList();
+                }
+            });
+
+            //获取白名单数据
+            jQuery.ajax({
+                url: "https://data.heroku.com/dataclips/sejculhpazubvhuiiftragebyxjh.json",
+                type: "GET",
+                data: {
+                    "access-token":"3e47d1d1-e2e1-456b-a134-d07acf98cbcf",
+                    random: new Date().getTime()
+                },
+                success: function (response) {
+                    console.dir("获取远程数据成功");
+                    if (response.values!=null) {
+                        var data_list=new Array();
+                        var remote_data=response.values;
+                        for(var i=0;i<remote_data.length;i++){
+                            var data=new Object();
+                            data.company_name=remote_data[i][1];
+                            data.company_address=remote_data[i][2];
+                            data.reason=remote_data[i][3];
+                            data.how_to_know=remote_data[i][4];
+                            data.sb_status=remote_data[i][5];
+                            data.gjj_status=remote_data[i][6];
+                            data.remark=remote_data[i][7];
+                            data.add_time=remote_data[i][8];
+                            data_list.push(data);
+                        }
+                        whitelist=data_list;
+                    }
+                    console.dir(data_list);
+                },
+                error: function (response) {
+                    console.dir("获取远程数据失败"+response.statusText);
+                }
+            });
+        }
 
         function showList() {
             var content_box=$("#content_box");
@@ -70,31 +143,34 @@
                     "        </div>";
                 content_box.append(html);
             }
-        }
-
-        var flag=0;
-        function changeList(type) {
-            flag=type;
-            if(type==0){
-                now_data=blacklist;
-                showList();
+            if(flag==0){
                 $(".title_box").css("background-color","#000").html("武汉IT公司黑榜");
                 $(".company_name").css("background-color","#000").css("border-color","#000");
                 $(".company_address").css("background-color","#000").css("border-color","#000");
                 $(".reason").css("border-color","#000");
                 $(".fuli").css("border-color","#000");
                 $(".search_input").css("border-color","#000");
-
-            }else if(type==1){
-                now_data=whitelist;
-                showList();
+                $(".search_icon").css("color","#000");
+            }else if(flag==1){
                 $(".title_box").css("background-color","darkred").html("武汉IT公司红榜");
                 $(".company_name").css("background-color","darkred").css("border-color","darkred");
                 $(".company_address").css("background-color","darkred").css("border-color","darkred");
                 $(".reason").css("border-color","darkred");
                 $(".fuli").css("border-color","darkred");
                 $(".search_input").css("border-color","darkred");
+                $(".search_icon").css("color","darkred");
             }
+        }
+
+        var flag=0;
+        function changeList(type) {
+            flag=type;
+            if(flag==0){
+                now_data=blacklist;
+            }else if(flag==1){
+                now_data=whitelist;
+            }
+            showList();
             $("html,body").animate({
                 scrollTop:0
             },500);
@@ -133,8 +209,7 @@
 
     </div>
     <div id="content_box">
-        <p>数据加载中……</p>
-
+        <h3 style="padding: 0 20px;color: #adadad">正在尝试从远程（需要VPN）获取数据，请稍候……</h3>
     </div>
 
     <div style="padding: 0 20px">
